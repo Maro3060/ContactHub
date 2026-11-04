@@ -11,7 +11,7 @@ var addBtn = document.getElementById('addBtn')
 
 var contactList = [];
     
-if(localStorage.getItem('contactlist')) {
+if(localStorage.getItem('contactList')) {
     contactList = JSON.parse(localStorage.getItem('contactList'));
     displayContacts(contactList);
 } else {
@@ -43,6 +43,7 @@ function addContact() {
     }
 
     contactList.push(contact);
+    contactsCounter();
     localStorage.setItem('contactList', JSON.stringify(contactList));
     
     displayContacts(contactList);
@@ -58,6 +59,12 @@ function clearInputs() {
     notesInput.value = "";
     favCheckBox.checked = false;
     emergencytCheckBox.checked = false;
+}
+
+function contactsCounter() {
+    if(contactList.length > 0) {
+        document.getElementById('totalContacts').innerText = contactList.length;
+    }
 }
 
 function displayContacts(list) {
@@ -139,7 +146,7 @@ function displayContacts(list) {
                                         <button class="action-button edit" id="editBtn" title="Edit">
                                             <i class="fas fa-pen"></i>
                                         </button>
-                                        <button class="action-button delete"id="deleteBtn" title="Delete" onclick="deleteContact(${i})">
+                                        <button class="action-button delete"id="deleteBtn" title="Delete" onclick="removeContact(${i})">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -152,7 +159,7 @@ function displayContacts(list) {
     document.getElementById('contactCardContainer').innerHTML = blackBox;
 }
 
-function deleteContact(idx) {
+function removeContact(idx) {
     contactList.splice(idx, 1);
     localStorage.setItem('contactList', JSON.stringify(contactList));
     displayContacts(contactList);
