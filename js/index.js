@@ -10,6 +10,24 @@ var favCheckBox = document.getElementById('favCheck');
 var addBtn = document.getElementById('addBtn')
 
 var contactList = [];
+    
+if(localStorage.getItem('contactlist')) {
+    contactList = JSON.parse(localStorage.getItem('contactList'));
+    displayContacts(contactList);
+} else {
+    document.getElementById('contactCardContainer').innerHTML = `
+    <div class="col-12 text-center py-5">
+                            <div class="d-flex align-items-center justify-content-center mx-auto mb-4 bg-secondary-subtle
+                                     rounded-4" style="width: 80px; height: 80px;">
+                                <i class="fas fa-address-book text-secondary fs-4"></i>
+                            </div>
+                            <p class="text-muted fw-semibold mb-1">No contacts found</p>
+                            <p class="text-secondary small">
+                                Click <strong>"Add Contact"</strong> to get started
+                            </p>
+                        </div>
+    `
+}
 
 function addContact() {
     var contact = {
