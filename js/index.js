@@ -13,7 +13,7 @@ var defaltImage = '../img/phone-book.png'
 
 var contactList = [];
     
-if(localStorage.getItem('contactList')) {
+if(localStorage.getItem('contactList') && JSON.parse(localStorage.getItem('contactList')).length > 0) {
     contactList = JSON.parse(localStorage.getItem('contactList'));
     displayContacts(contactList);
     contactsCounter();
