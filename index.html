@@ -391,192 +391,6 @@
       </div>
     </main>
 
-    <!-- Contact Modal -->
-    <div
-      id="contactModal"
-      class="modal-overlay position-fixed top-0 start-0 bottom-0 end-0 d-none justify-content-center align-items-center"
-    >
-      <div class="modal-dialog">
-        <div class="modal-container d-flex flex-column w-100">
-          <!-- Modal Header -->
-          <div class="modal-header border-bottom py-4 px-4">
-            <h2 id="modalTitle" class="h4 fw-bold text-dark mb-0">
-              Add New Contact
-            </h2>
-            <button id="closeModalBtn" type="button" class="btn-close"></button>
-          </div>
-
-          <div class="modal-scroll">
-            <!-- Modal Form -->
-            <form id="contactForm" class="p-4">
-              <!-- Avatar Upload -->
-              <div class="text-center mb-4">
-                <div id="avatarPreview" class="avatar-upload mx-auto mb-3">
-                  <i class="fas fa-user"></i>
-                </div>
-                <label
-                  class="btn btn-light btn-sm d-inline-flex align-items-center gap-2"
-                >
-                  <i class="fas fa-camera text-muted"></i>
-                  <span>Change Photo</span>
-                  <!-- because its wrapped in label -->
-                  <input
-                    type="file"
-                    id="avatarInput"
-                    accept="image/*"
-                    class="d-none"
-                  />
-                </label>
-                <input type="hidden" id="avatarPath" value="" />
-              </div>
-
-              <!-- Name -->
-              <div class="mb-3">
-                <label class="form-label fw-medium" for="contactName">
-                  Full Name <span class="text-danger">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="contactName"
-                  class="form-control-custom w-100 form-control-custom w-100-custom"
-                  placeholder="Enter full name"
-                />
-                <div id="contactNameError" class="invalid-feedback d-none">
-                  Name should contain only letters and spaces (2-50 characters)
-                </div>
-              </div>
-
-              <!-- Phone -->
-              <div class="mb-3">
-                <label class="form-label fw-medium" for="contactPhone">
-                  Phone Number <span class="text-danger">*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="contactPhone"
-                  class="form-control-custom w-100 form-control-custom w-100-custom"
-                  placeholder="e.g., 01012345678"
-                />
-                <div id="contactPhoneError" class="invalid-feedback d-none">
-                  Please enter a valid Egyptian phone number
-                </div>
-              </div>
-
-              <!-- Email -->
-              <div class="mb-3">
-                <label class="form-label fw-medium" for="contactEmail"
-                  >Email Address</label
-                >
-                <input
-                  type="email"
-                  id="contactEmail"
-                  class="form-control-custom w-100 form-control-custom w-100-custom"
-                  placeholder="name@example.com"
-                />
-                <div id="contactEmailError" class="invalid-feedback d-none">
-                  Please enter a valid email address
-                </div>
-              </div>
-
-              <!-- Address -->
-              <div class="mb-3">
-                <label class="form-label fw-medium" for="contactAddress"
-                  >Address</label
-                >
-                <input
-                  type="text"
-                  id="contactAddress"
-                  class="form-control-custom w-100 form-control-custom w-100-custom"
-                  placeholder="Enter address"
-                />
-              </div>
-
-              <!-- Group -->
-              <div class="mb-3">
-                <label class="form-label fw-medium" for="contactGroup"
-                  >Group</label
-                >
-                <select
-                  id="contactGroup"
-                  class="form-select form-control-custom w-100-custom"
-                >
-                  <option value="">Select a group</option>
-                  <option value="family">Family</option>
-                  <option value="friends">Friends</option>
-                  <option value="work">Work</option>
-                  <option value="school">School</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <!-- Notes -->
-              <div class="mb-3">
-                <label class="form-label fw-medium" for="contactNotes"
-                  >Notes</label
-                >
-                <textarea
-                  id="contactNotes"
-                  rows="2"
-                  class="form-control-custom w-100 form-control-custom w-100-custom"
-                  placeholder="Add notes about this contact"
-                ></textarea>
-              </div>
-
-              <!-- Checkboxes -->
-              <div class="d-flex flex-wrap gap-4 mb-4">
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    id="contactFavorite"
-                    class="form-check-input"
-                  />
-                  <label
-                    for="contactFavorite"
-                    class="form-check-label fw-medium"
-                  >
-                    <i class="fas fa-star text-warning me-1"></i>Favorite
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    id="contactEmergency"
-                    class="form-check-input"
-                  />
-                  <label
-                    for="contactEmergency"
-                    class="form-check-label fw-medium"
-                  >
-                    <i class="fas fa-heart-pulse text-danger me-1"></i>Emergency
-                  </label>
-                </div>
-              </div>
-
-              <input type="hidden" id="contactId" value="" />
-
-              <!-- Form Actions -->
-              <div class="d-flex flex-column-reverse flex-sm-row gap-3">
-                <button
-                  type="button"
-                  id="cancelModalBtn"
-                  class="btn btn-light flex-grow-1 py-3"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  id="submitModalBtn"
-                  class="btn primary-btn flex-grow-1 py-3"
-                >
-                  <i class="fas fa-check me-2"></i>Save Contact
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- modal -->
     <div
       class="modal fade modal-overlay"
@@ -614,10 +428,10 @@
                 <input
                   class="form-control"
                   type="file"
-                  id="personPhoto"
+                  id="contactPersonPhoto"
                   hidden
                 />
-                <label for="personPhoto" class="btn photo-btn">
+                <label for="contactPersonPhoto" class="btn photo-btn">
                   <i class="fa-solid fa-camera text-secondary"></i>
                   Change Photo
                 </label>
@@ -626,76 +440,77 @@
 
             <!-- full name *-->
             <div class="mb-3">
-              <label for="nameInput" class="form-label"
+              <label for="contactName" class="form-label"
                 >Full Name <span class="text-danger">*</span>
               </label>
               <input
                 type="text"
-                class="form-control-custom w-100 w-100"
-                id="nameInput"
+                class="form-control-custom w-100"
+                id="contactName"
                 placeholder="Enter full name"
               />
             </div>
 
             <!-- Phone Number *-->
             <div class="mb-3">
-              <label for="phoneInput" class="form-label"
+              <label for="contactNumber" class="form-label"
                 >Phone Number <span class="text-danger">*</span>
               </label>
               <input
                 type="tel"
                 class="form-control-custom w-100"
-                id="phoneInput"
+                id="contactNumber"
                 placeholder="e.g., 01012345678"
               />
             </div>
 
             <!-- Email Address -->
             <div class="mb-3">
-              <label for="emailInput" class="form-label">Email Address </label>
+              <label for="contactEmail" class="form-label"
+                >Email Address
+              </label>
               <input
                 type="tel"
                 class="form-control-custom w-100"
-                id="emailInput"
+                id="contactEmail"
                 placeholder="name@example.com"
               />
             </div>
 
             <!-- Address -->
             <div class="mb-3">
-              <label for="addressInput" class="form-label">Address</label>
+              <label for="contactAddress" class="form-label">Address</label>
               <input
                 type="text"
                 class="form-control-custom w-100"
-                id="addressInput"
+                id="contactAddress"
                 placeholder="Enter address"
               />
             </div>
 
             <!-- Group -->
             <div class="mb-3">
-              <label for="addressInput" class="form-label">Group</label>
+              <label for="contactGroup" class="form-label">Group</label>
               <select
                 class="form-select-custom w-100"
                 aria-label="Default select example"
+                id="contactGroup"
               >
-                <option selected>Open this select menu</option>
-                <option value="1">Family</option>
-                <option value="2">Friends</option>
-                <option value="3">Work</option>
-                <option value="3">School</option>
-                <option value="3">Other</option>
+                <option selected value="">Open this select menu</option>
+                <option value="family">Family</option>
+                <option value="friends">Friends</option>
+                <option value="work">Work</option>
+                <option value="school">School</option>
+                <option value="other">Other</option>
               </select>
             </div>
 
             <!-- Notes -->
             <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label"
-                >Notes</label
-              >
+              <label for="contactNotes" class="form-label">Notes</label>
               <textarea
                 class="form-control-custom w-100"
-                id="exampleFormControlTextarea1"
+                id="contactNotes"
                 rows="3"
                 style="resize: none"
                 placeholder="Add notes about this content"
@@ -708,7 +523,7 @@
                   class="form-check-input"
                   type="checkbox"
                   value=""
-                  id="checkDefault"
+                  id="favCheck"
                 />
                 <label class="form-check-label" for="checkDefault">
                   <i class="fa-solid fa-star text-warning"></i>
@@ -720,9 +535,9 @@
                   class="form-check-input"
                   type="checkbox"
                   value=""
-                  id="checkDefault"
+                  id="emergencyCheck"
                 />
-                <label class="form-check-label" for="checkDefault">
+                <label class="form-check-label" for="emergencyCheck">
                   <i class="fa-solid fa-heart-pulse text-danger"></i>
                   Emergency
                 </label>
@@ -736,7 +551,12 @@
               >
                 Cancel
               </button>
-              <button type="button" class="btn save-btn w-50" id="addContact">
+              <button
+                type="button"
+                class="btn save-btn w-50"
+                id="addBtn"
+                onclick="addContact()"
+              >
                 <i class="fa-solid fa-check"></i>
                 Save Contact
               </button>
@@ -747,6 +567,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
