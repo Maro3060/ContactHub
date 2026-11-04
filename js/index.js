@@ -9,11 +9,14 @@ var emergencytCheckBox = document.getElementById('emergencyCheck')
 var favCheckBox = document.getElementById('favCheck');
 var addBtn = document.getElementById('addBtn')
 
+var defaltImage = '../img/phone-book.png'
+
 var contactList = [];
     
 if(localStorage.getItem('contactList')) {
     contactList = JSON.parse(localStorage.getItem('contactList'));
     displayContacts(contactList);
+    contactsCounter();
 } else {
     document.getElementById('contactCardContainer').innerHTML = `
     <div class="col-12 text-center py-5">
@@ -31,7 +34,7 @@ if(localStorage.getItem('contactList')) {
 
 function addContact() {
     var contact = {
-        pesrsonPhoto: `../img/${pesrsonPhotoInput.files[0].name}`,
+        pesrsonPhoto: pesrsonPhotoInput.files[0] ? `../img/${pesrsonPhotoInput.files[0].name}` : defaltImage,
         fullName: fullNameInput.value,
         phoneNumber: phoneNumberInput.value,
         email: emailInput.value,
@@ -43,7 +46,7 @@ function addContact() {
     }
 
     contactList.push(contact);
-    contactsCounter();
+    contactsCounter(contactList.length);
     localStorage.setItem('contactList', JSON.stringify(contactList));
     
     displayContacts(contactList);
@@ -51,6 +54,7 @@ function addContact() {
 }
 
 function clearInputs() {
+    pesrsonPhotoInput.value = "";
     fullNameInput.value = "";
     phoneNumberInput.value = "";
     emailInput.value = "";
@@ -61,8 +65,8 @@ function clearInputs() {
     emergencytCheckBox.checked = false;
 }
 
-function contactsCounter() {
-    if(contactList.length > 0) {
+function contactsCounter(counter) {
+    if(counter > 0) {
         document.getElementById('totalContacts').innerText = contactList.length;
     }
 }
@@ -71,7 +75,7 @@ function displayContacts(list) {
     var blackBox = "";
 
     for (var i = 0; i < list.length; i++) {
-        blackBox = `
+        blackBox += `
          <div  class="col-md-6 col-lg-12 col-xl-6 mb-4">
                             <div class="contact-card">
                                
@@ -157,6 +161,7 @@ function displayContacts(list) {
         ` 
     }
     document.getElementById('contactCardContainer').innerHTML = blackBox;
+    contactsCounter(contactList.length);
 }
 
 function removeContact(idx) {
