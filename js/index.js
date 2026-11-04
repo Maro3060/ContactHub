@@ -139,7 +139,7 @@ function displayContacts(list) {
                                         <button class="action-button edit" id="editBtn" title="Edit">
                                             <i class="fas fa-pen"></i>
                                         </button>
-                                        <button class="action-button delete"id="deleteBtn" title="Delete">
+                                        <button class="action-button delete"id="deleteBtn" title="Delete" onclick="deleteContact(${i})">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -152,3 +152,8 @@ function displayContacts(list) {
     document.getElementById('contactCardContainer').innerHTML = blackBox;
 }
 
+function deleteContact(idx) {
+    contactList.splice(idx, 1);
+    localStorage.setItem('contactList', JSON.stringify(contactList));
+    displayContacts(contactList);
+}
