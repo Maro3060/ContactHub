@@ -8,11 +8,13 @@ var notesInput = document.getElementById('contactNotes');
 var emergencytCheckBox = document.getElementById('emergencyCheck')
 var favCheckBox = document.getElementById('favCheck');
 var addBtn = document.getElementById('addBtn')
+var updateBtn = document.getElementById('updateBtn')
 
-var defaltImage = '../img/phone-book.png'
-
+var defaultImage = '../img/phone-book.png'
 var contactList = [];
-    
+var favouriteList = [];
+var emergencyList = [];
+
 if(localStorage.getItem('contactList') && JSON.parse(localStorage.getItem('contactList')).length > 0) {
     contactList = JSON.parse(localStorage.getItem('contactList'));
     displayContacts(contactList);
@@ -34,7 +36,7 @@ if(localStorage.getItem('contactList') && JSON.parse(localStorage.getItem('conta
 
 function addContact() {
     var contact = {
-        pesrsonPhoto: pesrsonPhotoInput.files[0] ? `../img/${pesrsonPhotoInput.files[0].name}` : defaltImage,
+        pesrsonPhoto: pesrsonPhotoInput.files[0] ? `../img/${pesrsonPhotoInput.files[0].name}` : defaultImage,
         fullName: fullNameInput.value,
         phoneNumber: phoneNumberInput.value,
         email: emailInput.value,
@@ -53,6 +55,47 @@ function addContact() {
     clearInputs();
 }
 
+var updatedIdx;
+
+function editContact(idx) {
+    updatedIdx = idx;
+
+    fullNameInput.value = contactList[idx].fullName;
+    phoneNumberInput.value = contactList[idx].phoneNumber;
+    emailInput.value = contactList[idx].email;
+    addressInput.value = contactList[idx].address;
+    groupList.value = contactList[idx].group;
+    notesInput.value = contactList[idx].notes;
+    favCheckBox.checked = contactList[idx].favourite;
+    emergencytCheckBox.checked = contactList[idx].emergency;
+
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('staticBackdrop')).show();
+
+    addBtn.classList.add('d-none');
+    updateBtn.classList.remove('d-none');
+}
+
+function updateContact() {
+    contactList[updatedIdx].fullName = fullNameInput.value;
+    contactList[updatedIdx].phoneNumber = phoneNumberInput.value;
+    contactList[updatedIdx].email = emailInput.value;
+    contactList[updatedIdx].address = addressInput.value;
+    contactList[updatedIdx].group = groupList.value;
+    contactList[updatedIdx].notes = notesInput.value;
+    contactList[updatedIdx].favourite = favCheckBox.checked;
+    contactList[updatedIdx].emergency = emergencytCheckBox.checked;
+
+    displayContacts(contactList);
+    localStorage.setItem('contactList', JSON.stringify(contactList));
+
+    clearInputs();
+
+    updateBtn.classList.add('d-none');
+    addBtn.classList.remove('d-none');
+
+    bootstrap.Modal.getOrCreateInstance(document.getElementById(staticBackdrop)).hide();
+}
+
 function clearInputs() {
     pesrsonPhotoInput.value = "";
     fullNameInput.value = "";
@@ -65,9 +108,16 @@ function clearInputs() {
     emergencytCheckBox.checked = false;
 }
 
+function resetModal() {
+    clearInputs();
+
+    updateBtn.classList.add('d-none');
+    addBtn.classList.remove('d-none');
+}
+
 function contactsCounter(counter) {
     if(counter > 0) {
-        document.getElementById('totalContacts').innerText = contactList.length;
+        document.getElementById('totalContacts').innerText = document.getElementById('totalContactsSpan').innerText = counter;
     }
 }
 
@@ -119,17 +169,15 @@ function displayContacts(list) {
                                                 class="contact-detail-icon-container d-flex align-items-center justify-content-center emerald">
                                                 <i class="contact-detail-icon emerald fas fa-location-dot"></i>
                                             </div>
-                                            <span class="contact-detail-text truncate">${list[i].notes}</span>
+                                            <span class="contact-detail-text truncate">${list[i].address}</span>
                                         </div>
                                     </div>
 
-                               
+
                                     <div class="contact-tags">
                                         <span class="contact-tag d-inline-flex align-items-center">${list[i].group}</span>
                                     </div>
                                 </div>
-
-                             
                                 <div class="contact-card-actions">
                                     <div class="action-buttons-left">
                                         <a href="tel:01161615618" id="callBtn" class="action-button call" title="Call">
@@ -147,7 +195,7 @@ function displayContacts(list) {
                                         <button class="action-button emergency"id="emergncyBtn" title="Emergency">
                                             <i class="far fa-heart"></i>
                                         </button>
-                                        <button class="action-button edit" id="editBtn" title="Edit">
+                                        <button class="action-button edit" id="editBtn" title="Edit" onclick="editContact(${i})">
                                             <i class="fas fa-pen"></i>
                                         </button>
                                         <button class="action-button delete"id="deleteBtn" title="Delete" onclick="removeContact(${i})">
